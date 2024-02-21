@@ -8,7 +8,7 @@ const instSize = ref({
 })
 
 const colorChoices = [
-  'gray', // gray never actually shows because the color is turned off for 0.
+  'gray', // This color never actually shows because the color is turned off for 0.
   'red',
   'yellow',
   'green',
