@@ -35,7 +35,11 @@ const colorGrid = ref<number[][]>(
 )
 
 const setColor = (rowIndex: number, colIndex: number) => {
-  colorGrid.value[rowIndex][colIndex] = selectedIndex.value
+  if (colorGrid.value[rowIndex][colIndex] === selectedIndex.value) {
+    colorGrid.value[rowIndex][colIndex] = 0
+  } else {
+    colorGrid.value[rowIndex][colIndex] = selectedIndex.value
+  }
 }
 
 const clearAll = () => {
@@ -140,7 +144,8 @@ const clearColorsFromDevice = () => {
         <li>When you are connected, the "Send colors to LinnStrument" button will be enabled.</li>
         <li>
           Choose a color from the palette by clicking on it, then click on the keys in the
-          LinnStrument grid to set them to that color. The square on the left of the palette is
+          LinnStrument grid to set them to that color-- unless it is already that color, in which
+          case it will be cleared (set to "unset"). The square on the left of the palette is
           "unset", meaning that the current color will not be changed. The black dot is "off", which
           will turn off any light that is currently set. The "Clear All" button at the right of the
           palette will clear all the keys so you can start over.
@@ -222,6 +227,17 @@ const clearColorsFromDevice = () => {
       <button class="save-button" :disabled="!MIDIDevice || !memory" @click="clearColorsFromDevice">
         Clear colors from selected memory
       </button>
+    </div>
+    <div class="text">
+      <p>Copyright 2024 by Forrest Cahoon.</p>
+      <p>
+        Source is available
+        <a href="https://github.com/forrcaho/linnstrument_colorizer">on github</a> under the MIT
+        license. Please submit bugs and feature requests to
+        <a href="https://github.com/forrcaho/linnstrument_colorizer/issues">issues</a>, or better
+        yet, provide a
+        <a href="https://github.com/forrcaho/linnstrument_colorizer/pulls">pull request</a>.
+      </p>
     </div>
   </div>
 </template>
